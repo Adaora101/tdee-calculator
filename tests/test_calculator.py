@@ -17,5 +17,11 @@ class TestCalculator(unittest.TestCase):
         bmr = Calculator.calculate_bmr(profile)
         self.assertAlmostEqual(bmr, 1320.25, places=2)
 
+    def test_tdee_calculation(self):
+        # BMR is 1673.75. With 'moderate' activity (1.55): 1673.75 * 1.55 = 2594.3125
+        profile = UserProfile(age=25, weight_kg=70.0, height_cm=175.0, gender="male", activity_level="moderate")
+        tdee = Calculator.calculate_tdee(profile)
+        self.assertAlmostEqual(tdee, 2594.31, places=2)
+
 if __name__ == '__main__':
     unittest.main()
